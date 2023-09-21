@@ -11,9 +11,6 @@ First edit
 - crash.*.log     - все файлы с именем crash за которым следует . и какие то симолы и заканчивающиеся на .log
 - *.tfvars        - файлы заканчивающиеся на .tfvars
 - *.tfvars.json   - файлы заканчивающиеся на .tfvars.json
-
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
 - override.tf      - файлы override.tf
 - override.tf.json - файлы override.tf.json
 - *_override.tf    - файлы заканчивающиеся на _override.tf
