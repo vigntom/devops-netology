@@ -20,3 +20,8 @@ First edit
 
 - .terraformrc - файл .terraformrc
 - terraform.rc - файл terraform.rc
+
+# commits with ide
+
+Number one
+
