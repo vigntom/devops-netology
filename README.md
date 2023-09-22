@@ -23,3 +23,5 @@ override.tf.json - файлы override.tf.json
 
 .terraformrc - файл .terraformrc
 terraform.rc - файл terraform.rc
+
+New line from fix branch
