@@ -2,7 +2,7 @@
   "builders": [
     {
       "type":      "yandex",
-      "token":     "***REMOVED***",
+      "token":     "<token>",
       "folder_id": "***REMOVED***",
       "zone":      "ru-central1-c",
 
