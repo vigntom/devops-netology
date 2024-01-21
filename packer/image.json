@@ -3,7 +3,7 @@
     {
       "type":      "yandex",
       "token":     "<token>",
-      "folder_id": "***REMOVED***",
+      "folder_id": "<folder_id>",
       "zone":      "ru-central1-c",
 
       "image_name":        "debian-11-nginx-{{isotime | clean_resource_name}}",
