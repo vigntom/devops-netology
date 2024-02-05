@@ -1,11 +1,5 @@
 variable "web_resources" {
-  type = object({
-    type = string,
-    cores = number,
-    memory = number,
-    core_fraction = number,
-    preemptible = bool
-  })
+  type = object({ type=string, cores=number, memory = number, core_fraction=number, preemptible=bool })
 
   default = {
     type  = "standard-v2"
@@ -19,7 +13,7 @@ variable "web_resources" {
 }
 
 variable "metadata" {
-  type = object({ serial-port-enable = number, ssh-keys = string })
+  type = object({ serial-port-enable=number, ssh-keys=string })
   default = {
     serial-port-enable = 1
     ssh-keys           = ""
@@ -27,11 +21,8 @@ variable "metadata" {
   description = "Instance metadata"
 }
 
-data "yandex_compute_image" "ubuntu" {
-  family = "ubuntu-2204-lts"
-}
-
 resource "yandex_compute_instance" "web" {
+  depends_on = [ yandex_compute_instance.db ]
   count = 2
   name = "web-${count.index + 1}"
   platform_id = var.web_resources.type
