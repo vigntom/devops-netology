@@ -31,10 +31,10 @@ resource "yandex_compute_instance" "storage" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
-    nat       = true
+    nat       = false
   }
 
-  metadata = merge(var.metadata, { ssh-keys: local.ssh-keys })
+  metadata = merge(var.metadata, { ssh-keys: "ubuntu:${local.ssh-keys}" })
 
   dynamic "secondary_disk" {
     for_each = range(3)

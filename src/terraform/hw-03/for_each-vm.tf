@@ -45,5 +45,5 @@ resource "yandex_compute_instance" "db" {
     nat       = true
   }
 
-  metadata = merge(var.metadata, { ssh-keys: local.ssh-keys })
+  metadata = merge(var.metadata, { ssh-keys: "ubuntu:${local.ssh-keys}" })
 }
