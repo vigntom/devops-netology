@@ -16,7 +16,7 @@
 ------
 
 #### Результат:
-  [код задания](./demonstration1) Так как provider template_file не доступен для arm процессора, то немного изменил блок для cloud-init в main.tf
+  Код: [demonstration1](./demonstration1) Так как provider template_file не доступен для arm процессора, то немного изменил блок для cloud-init в main.tf
 
   **web-0 (markenting)**
 
@@ -50,6 +50,17 @@ module "vpc_dev" {
   cidr = "10.0.1.0/24"
 }
 ```
+
+------
+
+#### Результат:
+
+  Код [src](./src)
+
+  Скриншот terraform console
+![vpc-dev](./images/vpc-dev-concole.jpg)
+    
+------
 
 ### Задание 3
 1. Выведите список ресурсов в стейте.

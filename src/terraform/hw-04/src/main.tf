@@ -1,4 +1,4 @@
-module "network" {
+module "vpc-dev" {
   source = "./vpc"
   name = "develop"
   zone = var.default_zone

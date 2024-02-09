@@ -1,6 +1,6 @@
-output "test-net" {
+output "vpc-dev" {
   value = {
-    net = module.network.network,
-    subnet = module.network.subnet
+    net = module.vpc-dev.network,
+    subnet = module.vpc-dev.subnet
   }
 }
