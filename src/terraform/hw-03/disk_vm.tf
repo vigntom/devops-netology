@@ -37,9 +37,9 @@ resource "yandex_compute_instance" "storage" {
   metadata = merge(var.metadata, { ssh-keys: "ubuntu:${local.ssh-keys}" })
 
   dynamic "secondary_disk" {
-    for_each = range(3)
+    for_each = yandex_compute_disk.storage
     content {
-      disk_id = yandex_compute_disk.storage[secondary_disk.value].id
+      disk_id = yandex_compute_disk.storage[secondary_disk.key].id
     }
   }
 }

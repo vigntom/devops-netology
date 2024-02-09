@@ -18,21 +18,21 @@ variable "db-vms" {
 }
 
 resource "yandex_compute_instance" "db" {
-  for_each = toset(["main", "replica"])
+  for_each = var.db-vms //toset(["main", "replica"])
 
-  name        = each.value
+  name        = each.key
   platform_id = "standard-v2"
   zone        = var.default_zone
   resources {
-    cores         = var.db-vms[each.value].cpu
-    memory        = var.db-vms[each.value].ram
-    core_fraction = var.db-vms[each.value].fraction
+    cores         = each.value.cpu
+    memory        = each.value.ram
+    core_fraction = each.value.fraction
   }
 
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.image_id
-      size     = var.db-vms[each.value].disk_volume
+      size     = each.value.disk_volume
     }
   }
 
