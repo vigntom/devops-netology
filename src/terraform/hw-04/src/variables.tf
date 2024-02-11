@@ -31,27 +31,24 @@ variable "vpc_name" {
   description = "VPC network&subnet name"
 }
 
-###common vars
+### project vars
 
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "your_ssh_ed25519_key"
-  description = "ssh-keygen -t ed25519"
+variable "env-name" {
+  type = string
+  default = "dev"
+  description = "Environment name"
+  validation {
+    condition = contains(["prod", "stage", "dev"], var.env-name)
+    error_message = "The variable can be prod, stage or dev"
+  }
 }
 
-###example vm_web var
-variable "vm_web_name" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "example vm_web_ prefix"
+variable "vms" {
+  type = list(map(string))
+  default = [
+    { name: "markenting", count: 1 },
+    { name: "analytics", count: 1 },
+  ]
+
+  description = "Project vm instances"
 }
-
-###example vm_db var
-variable "vm_db_name" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "example vm_db_ prefix"
-}
-
-
-

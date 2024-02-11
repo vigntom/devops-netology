@@ -17,6 +17,7 @@
 
 #### Результат:
   Код: [demonstration1](./demonstration1) Так как provider template_file не доступен для arm процессора, то немного изменил блок для cloud-init в main.tf
+  В ходе 3 задания перенес все в src и немного обновил (после фидбека с предыдущего дз), но код по которым скрины из папки [demonstration1](./demonstration1) оставил.
 
   **web-0 (markenting)**
 
@@ -68,6 +69,71 @@ module "vpc_dev" {
 3. Полностью удалите из стейта модуль vm.
 4. Импортируйте всё обратно. Проверьте terraform plan. Изменений быть не должно.
 Приложите список выполненных команд и скриншоты процессы.
+
+```bash
+terraform state list
+```
+![state list](./images/state-list.jpg)
+
+------
+
+```bash
+terraform state show 'module.vm[0].data.yandex_compute_image.my_image' | grep id
+terraform state show 'module.vm[0].yandex_compute_instance.vm[0]' | grep id
+terraform state show 'module.vm[1].data.yandex_compute_image.my_image' | grep 'id'
+terraform state show 'module.vm[1].yandex_compute_instance.vm[0]' | grep 'id'
+terraform state show 'module.vpc-dev.yandex_vpc_network.net' | grep 'id'
+terraform state show 'module.vpc-dev.yandex_vpc_subnet.net' | grep 'id'
+```
+
+![state show](./images/state-show.jpg)
+
+------
+
+```bash
+terraform state rm 'module.vm[0].data.yandex_compute_image.my_image'
+terraform state rm 'module.vm[0].yandex_compute_instance.vm[0]'
+terraform state rm 'module.vm[1].data.yandex_compute_image.my_image'
+terraform state rm 'module.vm[1].yandex_compute_instance.vm[0]'
+terraform state rm 'module.vpc-dev.yandex_vpc_network.net'
+terraform state rm 'module.vpc-dev.yandex_vpc_subnet.net'
+```
+
+![state rm](./images/state-rm.jpg)
+
+------
+
+```bash
+terraform import 'module.vpc-dev.yandex_vpc_subnet.net' e9b38ecs0qrerp0ap85v
+terraform import 'module.vpc-dev.yandex_vpc_network.net' enp5atd221dvdvhelg4k
+```
+
+![import vpc-dev](./images/import-net.jpg)
+
+------
+
+```bash
+terraform import 'module.vm[1].yandex_compute_instance.vm[0]' fhm4uljevuvdsbkad8l8
+```
+
+![import vm 1](./images/import-vm1.jpg)
+
+------
+
+```bash
+terraform import 'module.vm[0].yandex_compute_instance.vm[0]' fhmfkvi8q1vqn2mc1hhc
+```
+
+![import vm 0](./images/import-vm0.jpg)
+
+------
+
+```bash
+terraform plan
+```
+![plan](./images/terraform-plan.jpg)
+
+------
 
 ## Дополнительные задания (со звёздочкой*)
 
@@ -165,7 +231,6 @@ terraform console: >nonsensitive(data.vault_generic_secret.vault_example.data.<�
 
 * задание выполнено частично или не выполнено вообще,
 * в логике выполнения заданий есть противоречия и существенные недостатки. 
-
 
 
 
